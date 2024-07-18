@@ -1,0 +1,1 @@
+export const spotifyLoginCallbackUri = 'http://127.0.0.1:3000/callback'
