@@ -3,8 +3,9 @@ import {BrowserRouter, Route, Router, Routes} from "react-router-dom"
 import {Home} from "./screens/Home"
 import {SpotifyLoginCallback} from "./screens/SpotifyLoginCallback"
 import {YTMusicToSpotify} from "./screens/YTMusicToSpotify";
-import {SpotifyToYTMusic} from "./screens/SpotifyToYTMusic";
+import {SpotifyPlaylists} from "./screens/SpotifyPlaylists";
 import {UserProvider} from "./hoc/UserProvider";
+import {SpotifyTransfer} from "./screens/SpotifyTransfer";
 
 export const App: React.FC = () => {
 
@@ -19,7 +20,9 @@ export const App: React.FC = () => {
                             <Route path='/callback' element={<SpotifyLoginCallback/>}/>
 
                             <Route path='/ytmusic-to-spotify' element={<YTMusicToSpotify/>}/>
-                            <Route path='/spotify-to-ytmusic' element={<SpotifyToYTMusic/>}/>
+
+                            <Route path='/spotify-to-ytmusic' element={<SpotifyPlaylists/>}/>
+                            <Route path='/spotify/transfer/:plId' element={<SpotifyTransfer/>}/>
                         </Routes>
                     </div>
                 </BrowserRouter>

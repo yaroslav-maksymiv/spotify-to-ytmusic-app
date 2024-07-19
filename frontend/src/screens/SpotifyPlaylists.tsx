@@ -3,13 +3,14 @@ import axios from "axios";
 import {PlaylistItem} from "../components/PlaylistItem";
 import {LoginRequiredMessage} from "../components/LoginRequiredMessage";
 import {Loader} from "../components/Loader";
+import {Link} from "react-router-dom";
 
 interface PlaylistsData {
     next: string | null
     items: []
 }
 
-export const SpotifyToYTMusic: React.FC = () => {
+export const SpotifyPlaylists: React.FC = () => {
     const isLoggedIn = localStorage.getItem('google_logged_in') === 'yes' && localStorage.getItem('spotify_logged_in') === 'yes'
     const token = localStorage.getItem('access_token')
 
@@ -66,12 +67,14 @@ export const SpotifyToYTMusic: React.FC = () => {
             <div className="text-4xl text-white text-bold mb-8">Select Playlist</div>
             <div className="grid grid-cols-5 gap-4">
                 {!loading &&
-                    <PlaylistItem name={'Liked Songs'}
-                                  image={'https://misc.scdn.co/liked-songs/liked-songs-300.png'}/>}
+                    (<Link to={'/spotify/transfer/liked'}>
+                        <PlaylistItem name={'Liked Songs'}
+                                      image={'https://misc.scdn.co/liked-songs/liked-songs-300.png'}/>
+                    </Link>)}
                 {playlistsData?.items && playlistsData.items.map((item: any) => (
-                    <div key={item.id}>
-                        <PlaylistItem name={item.name} image={item.images[0].url}/>
-                    </div>
+                    <Link to={`/spotify/transfer/${item.id}`} key={item.id}>
+                        <PlaylistItem name={item.name} image={item.images ? item.images[0].url : 'https://community.spotify.com/t5/image/serverpage/image-id/25294i2836BD1C1A31BDF2?v=v2'}/>
+                    </Link>
                 ))}
             </div>
             {loading && (
